@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Page Title</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="app.css" rel="stylesheet" type="text/css" />
+<script src="app.js" type="application/JavaScript"></script>
+</head>
+<body>
+
+<div class="header">
+  <h1>Code Mentor</h1>
+  <p>Going from ground zero to Developer</p>
+</div>
+
+<div class="navbar">
+  <a href="index.html">Home</a>
+  <a href="about.html">About</a>
+  <a href="Contact.html">Contact</a>
+  <a href="https://github.com/CodeNamor" class="right">GitHub</a>
+</div>
+
+<div class="row">
+  <div class="side">
+      <h2>About Me</h2>
+      <h5>Photo of me:</h5>
+      <div style="height:200px;">
+        <img src="./Images/Derek 2 cropped.gif" alt="me" height="200px"/>
+      </div>
+      <p>Origninally i fell into IT around 2003 when i started working for different help desks. For around 10 years I began working as 
+        contractor for many different big name organizations. Learning what was needed for IT professionals in many large organizations. In 2011,
+        I landed my first direct hire job for an organization and within a year i was working as a system administrator for a local governement's applciations.
+        Managing applications like exchange, Active Directory, Skype, etc. During this time i decided to go back to school and pusue my bachelors degree. That
+        was when i transferred to an Applications Development team and truly fell in love being a software developer. My journey still isnt over, actually 
+        its still going on as I try to get better each day. They say the best way to get better is to teach. Here I am passing some knowledge that I have
+        to others in the software development community.
+      </p>
+      <h3>Technologies:</h3>
+      <p>Other technologies that I am working with Professionally or Academically</p>
+        <div>Object Oriented
+            <ul>
+                <li>Python</li>
+                <li>C#</li>
+                <li>Java</li>
+                <li>GoLang</li>
+                </ul>
+        </div><br>
+        <div>Mobile
+            <ul>
+            <li>Swift</li>
+            <li>Xamarin</li>
+            </ul>
+        </div><br>
+        <div>Web Technologies
+            <ul>
+                <li>HTML5</li>
+                <li>CSS</li>
+                <li>JavaScript</li>
+                <li>Node.js</li>
+            </ul>
+        </div><br>
+        <div>Game Driven Technologies
+            <ul>
+            <li>Unreal</li>
+            <li>Unity</li>
+            </ul>
+        </div>
+  </div>
+  <div class="main">
+        <p id="Response"></p>
+        <?php
+        // define variables and set to empty values
+        $nameErr = $emailErr = $genderErr = $websiteErr = "";
+        $name = $email = $gender = $comment = $website = "";
+        
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+          if (empty($_POST["name"])) {
+            $nameErr = "Name is required";
+          } else {
+            $name = test_input($_POST["name"]);
+            // check if name only contains letters and whitespace
+            if (!preg_match("/^[a-zA-Z ]*$/",$name)) {
+              $nameErr = "Only letters and white space allowed"; 
+            }
+          }
+          
+          if (empty($_POST["email"])) {
+            $emailErr = "Email is required";
+          } else {
+            $email = test_input($_POST["email"]);
+            // check if e-mail address is well-formed
+            if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+              $emailErr = "Invalid email format"; 
+            }
+          }
+            
+          if (empty($_POST["website"])) {
+            $website = "";
+          } else {
+            $website = test_input($_POST["website"]);
+            // check if URL address syntax is valid (this regular expression also allows dashes in the URL)
+            if (!preg_match("/\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i",$website)) {
+              $websiteErr = "Invalid URL"; 
+            }
+          }
+        
+          if (empty($_POST["comment"])) {
+            $comment = "";
+          } else {
+            $comment = test_input($_POST["comment"]);
+          }
+        
+          if (empty($_POST["gender"])) {
+            $interestErr = "Interest is required";
+          } else {
+            $Object-Oriented = test_input($_POST["Object-Oriented"]);
+          }
+        }
+        
+        function test_input($data) {
+          $data = trim($data);
+          $data = stripslashes($data);
+          $data = htmlspecialchars($data);
+          return $data;
+        }
+        ?>
+        
+        <h2>Contact Form</h2>
+        <p><span class="error">* required field</span></p>
+        <form method="post" action="?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>  
+          Name: <input type="text" name="name" value="">
+          <span class="error">*</span>
+          <br><br>
+          E-mail: <input type="text" name="email" >
+          <span class="error">* <?php echo $emailErr;?></span>
+          <br><br>
+          Website: <input type="text" name="website" ">
+          <span class="error"><?php echo $websiteErr;?></span>
+          <br><br>
+          Comment: <textarea name="comment" rows="5" cols="40"></textarea>
+          <br><br>
+          Interests Currently:
+          <input type="radio" name="Web" <?php if (isset($web) && $web=="web") echo "checked"; value="web">web
+          <input type="radio" name="Mobile" <?php if (isset($Mobile) && $Mobile=="Mobile") echo "checked"; value="Mobile">Mobile
+          <input type="radio" name="Object-Oriented" <?php if (isset($Object-Oriented) && $Object-Oriented=="other") echo "checked"; value="Object-Oriented">Object-Oriented  
+          <span class="error">* <?php echo $interestErr;?></span>
+          <br><br>
+          <input type="submit" name="submit" value="Submit" on-click="formSubmit()">  
+        </form>
+  </div>
+</div>
+
+<footer class="footer">
+    <p>&copy;2018 F. Derek Roman</p>
+    <p>Contact information: <a href="mailto:froman1@live.maryville.com">Contact Me</a>.</p>
+  </footer>
+
+</body>
+</html>
